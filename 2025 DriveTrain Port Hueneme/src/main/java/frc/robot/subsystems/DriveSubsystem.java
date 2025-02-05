@@ -5,66 +5,38 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.OperatorConstants;
 
 public class DriveSubsystem extends SubsystemBase {
-
-  // Initialize Left Motors
-  private TalonSRX leftFrontMotor = new TalonSRX(21);
-  private TalonSRX leftRearMotor = new TalonSRX(23);
-
-  // Initialize Right Motors
-  private TalonSRX rightFrontMotor = new TalonSRX(22);
-  private TalonSRX rightRearMotor = new TalonSRX(24);
-
-  // Initialize Encoder
-  private Encoder encoder = new Encoder(1,2);
-
-  // Initialize Joystick
-  Joystick joystickOne = new Joystick(0);
-
-  
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
     // Reset motors to default values
-    leftFrontMotor.configFactoryDefault();
-    leftRearMotor.configFactoryDefault();
-    rightFrontMotor.configFactoryDefault();
-    rightRearMotor.configFactoryDefault();
+    OperatorConstants.leftFrontMotor.configFactoryDefault();
+    OperatorConstants.leftRearMotor.configFactoryDefault();
+    OperatorConstants.rightFrontMotor.configFactoryDefault();
+    OperatorConstants.rightRearMotor.configFactoryDefault();
     
     // Set motors to either invert/not-invert
-    leftFrontMotor.setInverted(true);
-    leftRearMotor.setInverted(true);
-    rightFrontMotor.setInverted(false);
-    rightRearMotor.setInverted(false);
+    OperatorConstants.leftFrontMotor.setInverted(true);
+    OperatorConstants.leftRearMotor.setInverted(true);
+    OperatorConstants.rightFrontMotor.setInverted(false);
+    OperatorConstants.rightRearMotor.setInverted(false);
 
     // Reset encoder
-    encoder.reset();
+    OperatorConstants.encoder.reset();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Encoder Value: ", getEncoderValue());
-    SmartDashboard.putNumber("Joystick One Y-Axis: ", getYAxisValue(joystickOne));
-    SmartDashboard.putNumber("Joystick One X-Axis: ", getXAxisValue(joystickOne));
-  }
+    SmartDashboard.putNumber("Encoder Value: ", OperatorConstants.encoder.getDistance());
 
-  public double getEncoderValue() {
-    return encoder.getDistance();
-  }
-
-  public double getYAxisValue(Joystick joystickOne) {
-    return joystickOne.getRawAxis(1);
-  }
-
-  public double getXAxisValue(Joystick joystickOne) {
-    return joystickOne.getRawAxis(0);
+    SmartDashboard.putNumber("Joystick One X-Axis: ", OperatorConstants.joystickOne.getRawAxis(0));
+    SmartDashboard.putNumber("Joystick One Y-Axis: ", OperatorConstants.joystickOne.getRawAxis(1));
+    SmartDashboard.putNumber("Joystick One Z-Axis: ", OperatorConstants.joystickOne.getRawAxis(2));
   }
 
   // For Teleop
@@ -73,12 +45,12 @@ public class DriveSubsystem extends SubsystemBase {
     double rightSpeed = ((speed - turn)/4.0);
     
     SmartDashboard.putNumber("Left Speed: ", leftSpeed);
-    leftRearMotor.set(TalonSRXControlMode.Follower,leftFrontMotor.getDeviceID());
-    leftFrontMotor.set(TalonSRXControlMode.PercentOutput, leftSpeed);
+    OperatorConstants.leftRearMotor.set(TalonSRXControlMode.Follower,OperatorConstants.leftFrontMotor.getDeviceID());
+    OperatorConstants.leftFrontMotor.set(TalonSRXControlMode.PercentOutput, leftSpeed);
     
     SmartDashboard.putNumber("Right Speed: ", rightSpeed);
-    rightRearMotor.set(TalonSRXControlMode.Follower, rightFrontMotor.getDeviceID());
-    rightFrontMotor.set(TalonSRXControlMode.PercentOutput, rightSpeed);
+    OperatorConstants.rightRearMotor.set(TalonSRXControlMode.Follower, OperatorConstants.rightFrontMotor.getDeviceID());
+    OperatorConstants.rightFrontMotor.set(TalonSRXControlMode.PercentOutput, rightSpeed);
   }
 
   // For Autonomous
@@ -86,9 +58,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   // To stop all motors
   public void stop() {
-    leftFrontMotor.neutralOutput();
-    leftRearMotor.neutralOutput();
-    rightFrontMotor.neutralOutput();
-    rightRearMotor.neutralOutput();
+    OperatorConstants.leftFrontMotor.neutralOutput();
+    OperatorConstants.leftRearMotor.neutralOutput();
+    OperatorConstants.rightFrontMotor.neutralOutput();
+    OperatorConstants.rightRearMotor.neutralOutput();
   }
 }

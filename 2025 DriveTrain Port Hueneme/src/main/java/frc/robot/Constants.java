@@ -4,6 +4,11 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -15,5 +20,42 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    
+    public static final int kJoystickOnePort = 0;
+    public static final int kJoystickTwoPort = 1;
+    
+    public static final int kEncoderChannelA = 0;
+    public static final int kEncoderChannelB = 1;
+
+    // Left Front Motor Controller Port
+    public static final int kLFMCPort = 21;
+    // Left Rear Motor Controller Port
+    public static final int kLRMCPort = 22;
+    // Right Front Motor Controller Port
+    public static final int kRFMCPort = 23;
+    // Right Rear Motor Controller Port
+    public static final int kRRMCPort = 24;
+    
+    // Initialize Encoders
+    public static final Encoder encoder = new Encoder(kEncoderChannelA,kEncoderChannelB);
+
+    // Initialize Controllers/Joysticks
+    public static final Joystick joystickOne = new Joystick(kJoystickOnePort);
+    public static final Joystick joystickTwo = new Joystick(kJoystickTwoPort);
+
+    // Initialize DriveTrain Motor Controllers
+    public static final TalonSRX leftFrontMotor = new TalonSRX(kLFMCPort);
+    public static final TalonSRX leftRearMotor = new TalonSRX(kLRMCPort);
+    public static final TalonSRX rightFrontMotor = new TalonSRX(kRFMCPort);
+    public static final TalonSRX rightRearMotor = new TalonSRX(kRRMCPort);
+
+    // Initialize Wench Motor Controllers
+    public static final TalonSRX leftWench = new TalonSRX(96);
+    public static final TalonSRX rightWench = new TalonSRX(97);
+
+    // Initialize Grabber Motor Controllers
+    public static final TalonSRX leftGrabberMotor = new TalonSRX(98);
+    public static final TalonSRX rightGrabberMotor = new TalonSRX(99);
+
   }
 }
