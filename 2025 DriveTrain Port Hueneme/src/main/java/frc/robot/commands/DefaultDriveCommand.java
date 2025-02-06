@@ -4,24 +4,23 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.Constants.OperatorConstants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class DefaultDriveCommand extends Command {
 
   private DriveSubsystem driveTrain;
-  private Joystick joystickOne;
 
   private double speed;
   private double turn;
 
   /** Creates a new DefaultDriveCommand. */
-  public DefaultDriveCommand(DriveSubsystem driveTrain, Joystick joystickOne) {
+  public DefaultDriveCommand(DriveSubsystem driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driveTrain = driveTrain;
-    this.joystickOne = joystickOne;
     addRequirements(driveTrain);
   }
 
@@ -35,16 +34,10 @@ public class DefaultDriveCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    speed = joystickOne.getRawAxis(1);
-    turn = joystickOne.getRawAxis(0);
+    speed = OperatorConstants.joystickOne.getRawAxis(1);
+    turn = OperatorConstants.joystickOne.getRawAxis(0);
 
     driveTrain.set(speed, turn);
-
-    // if((joystickOne.getRawAxis(1) > 0.2) || (joystickOne.getRawAxis(1) < -0.2)) {
-    //   driveTrain.set(speed, turn);
-    // } else {
-    //   driveTrain.set(0,0);
-    // }
   }
 
   // Called once the command ends or is interrupted.
