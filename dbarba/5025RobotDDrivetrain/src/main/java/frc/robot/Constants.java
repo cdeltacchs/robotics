@@ -35,8 +35,11 @@ public final class Constants {
     public static final int kRFMCPort = 23; // Right Front Motor Controller
     public static final int kRRMCPort = 24; // Right Rear Motor Controller
 
-    public static final int kLWMCPort = 96; // Right Front Motor Controller
-    public static final int kRWMCPort = 97; // Right Rear Motor Controller
+    public static final int kLWMCPort = 96; // Left Wench Motor Controller
+    public static final int kRWMCPort = 97; // Right Wench Motor Controller
+    
+    public static final int kLGMCPort = 98; // Left Grabber Motor Controller
+    public static final int kRGMCPort = 99; // Right Grabber Motor Controller
 
     // Init encoders
     public static final Encoder ttbEncoder = new Encoder(kTTBEncoderChannelA, kTTBEncoderChannelB);
@@ -54,5 +57,9 @@ public final class Constants {
     // Init wench motor controllers
     public static final TalonSRX leftWenchMotor = new TalonSRX(kLWMCPort);
     public static final TalonSRX rightWenchMotor = new TalonSRX(kRWMCPort);
+
+    // Init grabber motor controllers
+    public static final TalonSRX leftGrabberMotor = new TalonSRX(kLGMCPort);
+    public static final TalonSRX rightGrabberMotor = new TalonSRX(kRGMCPort);
   }
 }
