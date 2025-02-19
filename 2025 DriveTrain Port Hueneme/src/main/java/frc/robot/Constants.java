@@ -24,8 +24,8 @@ public final class Constants {
     public static final int kJoystickOnePort = 0;
     public static final int kJoystickTwoPort = 1;
     
-    public static final int kEncoderChannelA = 0;
-    public static final int kEncoderChannelB = 1;
+    public static final int kTTBEncoderChannelA = 0;
+    public static final int kTTBEncoderChannelB = 1;
 
     // Left Front Motor Controller Port
     public static final int kLFMCPort = 21;
@@ -37,7 +37,7 @@ public final class Constants {
     public static final int kRRMCPort = 24;
     
     // Initialize Encoders
-    public static final Encoder encoder = new Encoder(kEncoderChannelA,kEncoderChannelB);
+    public static final Encoder ttbEncoder = new Encoder(kTTBEncoderChannelA,kTTBEncoderChannelB);
 
     // Initialize Controllers/Joysticks
     public static final Joystick joystickOne = new Joystick(kJoystickOnePort);

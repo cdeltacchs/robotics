@@ -26,13 +26,13 @@ public class DriveSubsystem extends SubsystemBase {
     OperatorConstants.rightRearMotor.setInverted(false);
 
     // Reset encoder
-    OperatorConstants.encoder.reset();
+    OperatorConstants.ttbEncoder.reset();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Encoder Value: ", OperatorConstants.encoder.getDistance());
+    SmartDashboard.putNumber("Encoder Value: ", OperatorConstants.ttbEncoder.getDistance());
 
     SmartDashboard.putNumber("Joystick One X-Axis: ", OperatorConstants.joystickOne.getRawAxis(0));
     SmartDashboard.putNumber("Joystick One Y-Axis: ", OperatorConstants.joystickOne.getRawAxis(1));
