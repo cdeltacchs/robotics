@@ -27,6 +27,11 @@ public final class Constants {
     public static final int kTTBEncoderChannelA = 0;
     public static final int kTTBEncoderChannelB = 1;
 
+    // Initialize Amp/Volt Limits
+    public static final int kPeakCurrentLimit = 40;
+    public static final int kPeakCurrentDuration = 1500;
+    public static final int kContinousCurrentLimit = 30;
+
     // Left Front Motor Controller Port
     public static final int kLFMCPort = 21;
     // Left Rear Motor Controller Port
@@ -56,6 +61,5 @@ public final class Constants {
     // Initialize Grabber Motor Controllers
     public static final TalonSRX leftGrabberMotor = new TalonSRX(98);
     public static final TalonSRX rightGrabberMotor = new TalonSRX(99);
-
   }
 }

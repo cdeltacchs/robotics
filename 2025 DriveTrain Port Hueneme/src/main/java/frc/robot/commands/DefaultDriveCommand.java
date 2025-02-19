@@ -37,6 +37,8 @@ public class DefaultDriveCommand extends Command {
     speed = OperatorConstants.joystickOne.getRawAxis(1);
     turn = OperatorConstants.joystickOne.getRawAxis(0);
 
+    // Add code for when a button is pressed it triggers the current limit
+
     driveTrain.set(speed, turn);
   }
 
