@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,12 +40,14 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void set(double speed, double turn) {
-    OperatorConstants.leftRearMotor.follow(OperatorConstants.leftFrontMotor);// Fix
-    OperatorConstants.leftFrontMotor.set(ControlMode.PercentOutput, turn);// Fix but close
-    OperatorConstants.rightRearMotor.follow(OperatorConstants.rightFrontMotor);// Fix
-    OperatorConstants.rightFrontMotor.set(ControlMode.PercentOutput, turn);// Fix but close
-    SmartDashboard.putNumber("Left Speed", OperatorConstants.leftFrontMotor.getActiveTrajectoryVelocity());// Fix
-    SmartDashboard.putNumber("Right Speed", OperatorConstants.rightFrontMotor.getActiveTrajectoryVelocity());// Fix
+    double leftSpeed = (speed+turn)/4.0;
+    double rightSpeed = (speed-turn)/4.0;
+    OperatorConstants.leftRearMotor.set(TalonSRXControlMode.Follower, OperatorConstants.leftFrontMotor.getDeviceID());
+    OperatorConstants.leftFrontMotor.set(TalonSRXControlMode.PercentOutput, leftSpeed);
+    OperatorConstants.rightRearMotor.set(TalonSRXControlMode.Follower, OperatorConstants.rightFrontMotor.getDeviceID());
+    OperatorConstants.rightFrontMotor.set(TalonSRXControlMode.PercentOutput, rightSpeed);
+    SmartDashboard.putNumber("Left Speed", leftSpeed);
+    SmartDashboard.putNumber("Right Speed", rightSpeed);
   }
 
   public void tankMode(double left, double right) {}
