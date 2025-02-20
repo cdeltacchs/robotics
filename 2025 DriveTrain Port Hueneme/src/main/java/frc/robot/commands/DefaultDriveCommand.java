@@ -16,6 +16,8 @@ public class DefaultDriveCommand extends Command {
 
   private double speed;
   private double turn;
+  private boolean ampLimit;
+  private boolean voltLimit;
 
   /** Creates a new DefaultDriveCommand. */
   public DefaultDriveCommand(DriveSubsystem driveTrain) {
@@ -29,6 +31,8 @@ public class DefaultDriveCommand extends Command {
   public void initialize() {
     speed = 0;
     turn = 0;
+    ampLimit = false;
+    voltLimit = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,10 +40,10 @@ public class DefaultDriveCommand extends Command {
   public void execute() {
     speed = OperatorConstants.joystickOne.getRawAxis(1);
     turn = OperatorConstants.joystickOne.getRawAxis(0);
+    ampLimit = OperatorConstants.joystickOne.getRawButtonPressed(7);
+    voltLimit = OperatorConstants.joystickOne.getRawButtonPressed(8);
 
-    // Add code for when a button is pressed it triggers the current limit
-
-    driveTrain.set(speed, turn);
+    driveTrain.set(speed, turn, ampLimit, voltLimit);
   }
 
   // Called once the command ends or is interrupted.

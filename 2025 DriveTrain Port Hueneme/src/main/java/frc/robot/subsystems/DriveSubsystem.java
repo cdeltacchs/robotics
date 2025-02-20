@@ -13,6 +13,8 @@ import frc.robot.Constants.OperatorConstants;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
+  TalonSRXConfiguration config = new TalonSRXConfiguration();
+
   public DriveSubsystem() {
     // Reset motors to default values
     OperatorConstants.leftFrontMotor.configFactoryDefault();
@@ -29,16 +31,21 @@ public class DriveSubsystem extends SubsystemBase {
     // Reset encoder
     OperatorConstants.ttbEncoder.reset();
 
-    // Set Motor Controller Amp/Volt Configuration
-    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    // Set Motor Controller Amp Configuration
     config.peakCurrentLimit = OperatorConstants.kPeakCurrentLimit;
-    // Uncomment this to see changes | Erase code if button limiting works
-    // config.peakCurrentDuration = OperatorConstants.kPeakCurrentDuration;
+    config.peakCurrentDuration = OperatorConstants.kPeakCurrentDuration;
     config.continuousCurrentLimit = OperatorConstants.kContinousCurrentLimit;
     OperatorConstants.leftFrontMotor.configAllSettings(config);
     OperatorConstants.leftRearMotor.configAllSettings(config);
     OperatorConstants.rightFrontMotor.configAllSettings(config);
     OperatorConstants.rightRearMotor.configAllSettings(config);
+
+    // Set Motor Controller Volt Configuration
+    OperatorConstants.leftFrontMotor.configVoltageCompSaturation(OperatorConstants.kVoltageCompensation);
+    OperatorConstants.leftRearMotor.configVoltageCompSaturation(OperatorConstants.kVoltageCompensation);
+    OperatorConstants.rightFrontMotor.configVoltageCompSaturation(OperatorConstants.kVoltageCompensation);
+    OperatorConstants.rightRearMotor.configVoltageCompSaturation(OperatorConstants.kVoltageCompensation);
+
   }
 
   @Override
@@ -64,11 +71,21 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   // For Teleop
-  public void set(double speed, double turn) {
+  public void set(double speed, double turn, boolean ampLimit, boolean voltLimit) {
     double leftSpeed = ((speed + turn)/4.0);
     double rightSpeed = ((speed - turn)/4.0);
 
-    // Add code that accounts for a button and set the current limit
+    if (ampLimit) {
+      enableAmpLimit();
+    } else {
+      disableAmpLimit();
+    }
+
+    if (voltLimit) {
+      enableVoltLimit();
+    } else {
+      disableVoltLimit();
+    }
 
     OperatorConstants.leftFrontMotor.set(TalonSRXControlMode.PercentOutput, leftSpeed);
     OperatorConstants.leftRearMotor.set(TalonSRXControlMode.PercentOutput, leftSpeed);
@@ -89,11 +106,39 @@ public class DriveSubsystem extends SubsystemBase {
   // For Autonomous
   public void tankMode(double left, double right) {}
 
-  // To stop all motors
+    // To stop all motors
   public void stop() {
     OperatorConstants.leftFrontMotor.neutralOutput();
     OperatorConstants.leftRearMotor.neutralOutput();
     OperatorConstants.rightFrontMotor.neutralOutput();
     OperatorConstants.rightRearMotor.neutralOutput();
+  }
+
+  private void enableAmpLimit() {
+    OperatorConstants.leftFrontMotor.enableCurrentLimit(true);
+    OperatorConstants.leftRearMotor.enableCurrentLimit(true);
+    OperatorConstants.rightFrontMotor.enableCurrentLimit(true);
+    OperatorConstants.rightRearMotor.enableCurrentLimit(true);
+  }
+
+  private void disableAmpLimit() {
+    OperatorConstants.leftFrontMotor.enableCurrentLimit(false);
+    OperatorConstants.leftRearMotor.enableCurrentLimit(false);
+    OperatorConstants.rightFrontMotor.enableCurrentLimit(false);
+    OperatorConstants.rightRearMotor.enableCurrentLimit(false);
+  }
+
+  private void enableVoltLimit() {
+    OperatorConstants.leftFrontMotor.enableVoltageCompensation(true);
+    OperatorConstants.leftRearMotor.enableVoltageCompensation(true);
+    OperatorConstants.rightFrontMotor.enableVoltageCompensation(true);
+    OperatorConstants.rightRearMotor.enableVoltageCompensation(true);
+  }
+
+  private void disableVoltLimit() {
+    OperatorConstants.leftFrontMotor.enableVoltageCompensation(false);
+    OperatorConstants.leftRearMotor.enableVoltageCompensation(false);
+    OperatorConstants.rightFrontMotor.enableVoltageCompensation(false);
+    OperatorConstants.rightRearMotor.enableVoltageCompensation(false);
   }
 }

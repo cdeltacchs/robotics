@@ -27,10 +27,13 @@ public final class Constants {
     public static final int kTTBEncoderChannelA = 0;
     public static final int kTTBEncoderChannelB = 1;
 
-    // Initialize Amp/Volt Limits
+    // Initialize Amp Limit
     public static final int kPeakCurrentLimit = 40;
-    public static final int kPeakCurrentDuration = 1500;
-    public static final int kContinousCurrentLimit = 30;
+    public static final int kPeakCurrentDuration = 0;
+    public static final int kContinousCurrentLimit = 40;
+
+    // Initialize Volt Limit
+    public static final double kVoltageCompensation = 11.9;
 
     // Left Front Motor Controller Port
     public static final int kLFMCPort = 21;
