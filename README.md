@@ -3,7 +3,7 @@
 
 ## Table of Contents
 - [Installation](#installation)
-- [Usage](#usage)
+- [Usage](#how-to-build-and-deploy)
 - [Requirements](#requirements)
 - [Features](#features)
 - [Future Features](#future-features)
@@ -11,36 +11,45 @@
 
 ## Requirements
 
-* WPI Lib
-* RoboRIO
-* Latest CTRE Phoenix Packages for version 5 and 6
+### Software
+* [WPILib VSCode](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
+* [Java SDK](https://www.oracle.com/java/technologies/downloads/)
+* CTRE TalonSRX Hardware w/Firmware V5 or V6
 * REVLib
+* FRC Game Tools
+* Windows 10/11
+### Hardware
+* RoboRIO
+* VH-109 FRC Radio
+* VH-113 FRC Access Point
 
 ## Installation
 1. Clone the repository using the github app or by using a command terminal:
 ```bash
 git clone https://github.com/cdeltacchs/robotics.git
 ```
-2. Install WPI Lib and all neccesary packages
-3. Open the cloned file
-4. In the search bar, type in
+2. Verify that the [WPILib VSCode](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html) is installed as well as the [Java SDK](https://www.oracle.com/java/technologies/downloads/)
+## How to build and deploy
+1. Open the cloned repository in WPILib VSCode
+2. In the search bar, type in
 ```bash
 >WPILib
 ```
-5. Select `Build Robot Code`.
-## Usage
-1. In the search bar, type in:
+3. Select `Build Robot Code`.
+4. In the search bar, type in:
 ```bash
 >WPILib
 ```
-2. Select `Deploy Robot Code`.
+5. Select `Deploy Robot Code`.
 
 ## Features
-* Move the drivetain
+* Command-Based DriveTrain w/Mecanum Wheels
+* 3rd Party Vendor CTRE TalonSRX Motor Controller Library for V5 & V6
+* 3rd Party Vendor REV Robotics Library
 
 ## Future Features
-1. Encoders and other technical features
-2. Support for more motors
+1. DriveTrain TTB Encoders (Through The Bore) and other encoders
+2. Support for different command-based motors
 3. Autonomous
 
 ## Changelog
